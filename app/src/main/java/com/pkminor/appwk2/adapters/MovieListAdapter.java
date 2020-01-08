@@ -15,7 +15,7 @@ import com.pkminor.appwk2.models.Result;
 import java.util.List;
 
 public class MovieListAdapter extends RecyclerView.Adapter<MovieViewHolder> {
-    private List<Result> movies;
+    public static List<Result> movies;
     private Context mContext;
 
     public MovieListAdapter(Context context, List<Result> movies){
