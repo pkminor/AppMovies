@@ -55,6 +55,11 @@ public class Result {
     @Expose
     private String releaseDate;
 
+    @SerializedName("pushId")
+    @Expose
+    private String pushId;
+
+
     /**
      * No args constructor for use in serialization
      * 
@@ -229,6 +234,14 @@ public class Result {
         }
         Result rhs = ((Result) other);
         return new EqualsBuilder().append(overview, rhs.overview).append(voteAverage, rhs.voteAverage).append(releaseDate, rhs.releaseDate).append(video, rhs.video).append(originalLanguage, rhs.originalLanguage).append(genreIds, rhs.genreIds).append(title, rhs.title).append(originalTitle, rhs.originalTitle).append(popularity, rhs.popularity).append(voteCount, rhs.voteCount).append(id, rhs.id).append(backdropPath, rhs.backdropPath).append(adult, rhs.adult).append(posterPath, rhs.posterPath).isEquals();
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 
 }

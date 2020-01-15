@@ -23,6 +23,7 @@ public class PopularMoviesResponse {
     @Expose
     private List<Result> results = null;
 
+
     /**
      * No args constructor for use in serialization
      * 
@@ -98,5 +99,6 @@ public class PopularMoviesResponse {
         PopularMoviesResponse rhs = ((PopularMoviesResponse) other);
         return new EqualsBuilder().append(totalPages, rhs.totalPages).append(totalResults, rhs.totalResults).append(page, rhs.page).append(results, rhs.results).isEquals();
     }
+
 
 }

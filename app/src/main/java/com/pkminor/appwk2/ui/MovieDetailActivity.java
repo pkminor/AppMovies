@@ -28,6 +28,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Popular Movie Details");
         setContentView(R.layout.activity_movie_detail);
         ButterKnife.bind(this);
 

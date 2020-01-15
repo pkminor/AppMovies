@@ -4,13 +4,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.pkminor.appwk2.Constants;
 import com.pkminor.appwk2.R;
 import com.pkminor.appwk2.models.Result;
@@ -21,7 +27,7 @@ import org.parceler.Parcels;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MovieDetailFragment extends Fragment {
+public class MovieDetailFragment extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.movieImageView) ImageView movieImageView;
     @BindView(R.id.movieNameTextView) TextView movieNameTextView;
@@ -29,6 +35,7 @@ public class MovieDetailFragment extends Fragment {
     @BindView(R.id.releaseDateTextView) TextView releaseDateTextView;
     @BindView(R.id.languageTextView) TextView languageTextView;
     @BindView(R.id.overviewTextView) TextView overviewTextView;
+    @BindView(R.id.saveMovieButton) Button saveMovieButton;
 
     private Result movie;
 
@@ -64,6 +71,25 @@ public class MovieDetailFragment extends Fragment {
         languageTextView.setText(movie.getOriginalLanguage());
         overviewTextView.setText(movie.getOverview());
 
+        saveMovieButton.setOnClickListener(this);
+
         return view; //super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onClick(View v) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        DatabaseReference refMovies = FirebaseDatabase
+                .getInstance()
+                .getReference(Constants.FIREBASE_CHILD_MOVIES)
+                .child(user.getUid());
+
+        DatabaseReference pushRef = refMovies.push();
+        String pushId = pushRef.getKey();
+        movie.setPushId(pushId);
+        refMovies.push().setValue(movie);
+
+        Toast.makeText(getContext(),"Saved MOVIE ",Toast.LENGTH_SHORT).show();
     }
 }
