@@ -24,7 +24,8 @@ public class MoviePagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         //should have been onCreateFragment or getFragment to be consistent with onCreateViewHolder
-        return  MovieDetailFragment.newInstance(movies.get(position));
+//        return  MovieDetailFragment.newInstance(movies.get(position));
+          return  MovieDetailFragment.newInstance(movies,position);
     }
 
     @Override //getItemCount??

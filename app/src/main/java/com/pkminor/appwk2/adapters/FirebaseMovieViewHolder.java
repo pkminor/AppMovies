@@ -76,7 +76,7 @@ public class FirebaseMovieViewHolder extends RecyclerView.ViewHolder implements 
                 int itemPosition = getLayoutPosition();
 
                 Intent intent = new Intent(mContext, MovieDetailActivity.class);
-                intent.putExtra("position", itemPosition + "");
+                intent.putExtra("position", itemPosition );
                 intent.putExtra("movies", Parcels.wrap(movies));
 
                 mContext.startActivity(intent);
