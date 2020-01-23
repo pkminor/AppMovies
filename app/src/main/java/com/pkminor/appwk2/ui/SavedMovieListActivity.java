@@ -31,60 +31,62 @@ public class SavedMovieListActivity extends AppCompatActivity {
     private FirebaseRecyclerAdapter<Result, FirebaseMovieViewHolder> mFirebaseAdapter;
 
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
-    @BindView(R.id.progressBar) ProgressBar mProgressBar;
+//    @BindView(R.id.progressBar) ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Favorite Movies");
+        setTitle("Swappable Favorite Movies");
         setContentView(R.layout.activity_saved_movies_list);
         ButterKnife.bind(this);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        mMovieReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_MOVIES)
-        .child(user.getUid());
-
-        setupFirebaseAdapter();
-        mRecyclerView.setVisibility(View.VISIBLE);
-        mProgressBar.setVisibility(View.GONE);
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//
+//        mMovieReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_MOVIES)
+//        .child(user.getUid());
+//
+//        setupFirebaseAdapter();
+//        mRecyclerView.setVisibility(View.VISIBLE);
+//        mProgressBar.setVisibility(View.GONE);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mFirebaseAdapter.startListening();
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        mFirebaseAdapter.startListening();
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        if(mFirebaseAdapter!=null) mFirebaseAdapter.stopListening();
+//    }
+//
+//    private void setupFirebaseAdapter(){
+//
+//        FirebaseRecyclerOptions<Result> options =
+//                new FirebaseRecyclerOptions.Builder<Result>()
+//                        .setQuery(mMovieReference, Result.class)
+//                        .build();
+//
+//        mFirebaseAdapter = new FirebaseRecyclerAdapter<Result, FirebaseMovieViewHolder>(options) {
+//            @Override
+//            protected void onBindViewHolder(@NonNull FirebaseMovieViewHolder firebaseMovieViewHolder, int position, @NonNull Result movie) {
+//                firebaseMovieViewHolder.bindMovie(movie);
+//            }
+//
+//            @NonNull
+//            @Override
+//            public FirebaseMovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
+//                return new FirebaseMovieViewHolder(view);
+//            }
+//        }; //end firebase adapter definition
+//
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        mRecyclerView.setAdapter(mFirebaseAdapter);
+//
+//    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(mFirebaseAdapter!=null) mFirebaseAdapter.stopListening();
-    }
 
-    private void setupFirebaseAdapter(){
-
-        FirebaseRecyclerOptions<Result> options =
-                new FirebaseRecyclerOptions.Builder<Result>()
-                        .setQuery(mMovieReference, Result.class)
-                        .build();
-
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<Result, FirebaseMovieViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull FirebaseMovieViewHolder firebaseMovieViewHolder, int position, @NonNull Result movie) {
-                firebaseMovieViewHolder.bindMovie(movie);
-            }
-
-            @NonNull
-            @Override
-            public FirebaseMovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
-                return new FirebaseMovieViewHolder(view);
-            }
-        }; //end firebase adapter definition
-
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(mFirebaseAdapter);
-
-    }
 }

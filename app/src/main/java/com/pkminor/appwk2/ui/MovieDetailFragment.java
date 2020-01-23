@@ -24,6 +24,9 @@ import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -38,6 +41,8 @@ public class MovieDetailFragment extends Fragment implements View.OnClickListene
     @BindView(R.id.saveMovieButton) Button saveMovieButton;
 
     private Result movie;
+    private ArrayList<Result> mResults;
+    private int mPosition;
 
 
     public MovieDetailFragment(){}
@@ -52,10 +57,25 @@ public class MovieDetailFragment extends Fragment implements View.OnClickListene
         return movieDetailFragment;
     }
 
+        public static MovieDetailFragment newInstance(List<Result> results, Integer position) {
+        MovieDetailFragment movieDetailFragment = new MovieDetailFragment();
+        Bundle args = new Bundle();
+
+        args.putParcelable(Constants.EXTRA_KEY_MOVIES, Parcels.wrap(results));
+        args.putInt(Constants.EXTRA_KEY_POSITION, position);
+
+        movieDetailFragment.setArguments(args);
+        return movieDetailFragment;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        movie = Parcels.unwrap(getArguments().getParcelable("movie"));
+
+        mResults = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_KEY_MOVIES));
+        mPosition = getArguments().getInt(Constants.EXTRA_KEY_POSITION);
+        movie = mResults.get(mPosition);
+//        movie = Parcels.unwrap(getArguments().getParcelable("movie"));
     }
 
     @Nullable

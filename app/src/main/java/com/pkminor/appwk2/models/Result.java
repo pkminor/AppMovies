@@ -59,6 +59,10 @@ public class Result {
     @Expose
     private String pushId;
 
+    @SerializedName("index")
+    @Expose
+    private String index;
+
 
     /**
      * No args constructor for use in serialization
@@ -242,6 +246,14 @@ public class Result {
 
     public void setPushId(String pushId) {
         this.pushId = pushId;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 
 }

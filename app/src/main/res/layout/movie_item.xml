@@ -23,13 +23,13 @@
             android:id="@+id/movieNameTextView"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:text="Restaurant Name"
+            android:text="Movie Name"
             android:textColor="@color/colorPrimary"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="One Cuisine Type"
+            android:text="Release Date"
             android:id="@+id/releaseDateTextView"
             android:layout_below="@+id/movieNameTextView"
             android:layout_alignParentLeft="true"
